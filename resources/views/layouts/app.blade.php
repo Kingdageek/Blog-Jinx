@@ -72,9 +72,23 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('posts.create') }}">Create new post</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-8">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
