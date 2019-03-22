@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 </head>
 <body>
     <div id="app">
@@ -81,7 +82,10 @@
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('posts.create') }}">Create new post</a>
+                                <a href="{{ route('categories.index') }}">Categories</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('posts.index') }}">All posts</a>
                             </li>
                         </ul>
                     </div>
@@ -93,4 +97,7 @@
         </div>
     </div>
 </body>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
+@toastr_render
 </html>

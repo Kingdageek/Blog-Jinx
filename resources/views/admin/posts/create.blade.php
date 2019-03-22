@@ -8,15 +8,7 @@
 
         <div class="panel-body">
 
-            @if ($errors->any())
-                <ul class="list-group">
-                    @foreach ($errors->all() as $error)
-                        <li class="list-group-item text-danger">
-                            {{ $error }}
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
+            @include('admin.includes.errors')
             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -30,6 +22,14 @@
                     <input type="file" name="featured" class="form-control">
                 </div>
 
+                <div class="form-group">
+                    <label for="category_id">Select a category</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="content">Content</label>
                     <textarea name="content" id="content" cols="5" rows="5" class="form-control">{{ old('content') }}   </textarea>
