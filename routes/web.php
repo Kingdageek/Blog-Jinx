@@ -20,6 +20,10 @@ Auth::routes();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('/posts/trash', 'PostsController@trash')->name('posts.trash');
+    Route::post('/posts/restore/{post}', 'PostsController@restore')->name('posts.restore');
+    Route::post('/posts/delete/{post}', 'PostsController@delete')->name('posts.delete');
+
     Route::resource('/posts', 'PostsController');
 
     Route::resource('/categories', 'CategoriesController');
