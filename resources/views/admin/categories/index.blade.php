@@ -3,8 +3,12 @@
     <div>
         <a href="{{ route('categories.create') }}" class="btn btn-success text-right">Create new category</a>
     </div>
+    <div class="panel-heading">
+            <h2>All Categories</h2>
+        </div>
     <div class="panel panel-default">
         <div class="panel-body">
+        @if ( ! $categories->isEmpty() )
             <table class="table table-hover">
                 <thead>
                     <th>
@@ -35,6 +39,9 @@
                     @endforeach
                 </tbody>
             </table>
+        @else
+            <p class="text-center"><strong>You have not created any categories yet.</strong></p>
+        @endif
         </div>
     </div>
 
