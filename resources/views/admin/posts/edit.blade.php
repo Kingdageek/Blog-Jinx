@@ -27,13 +27,37 @@
                     <label for="category_id">Select a category</label>
                     <select name="category_id" id="category_id" class="form-control">
                         @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}"
+                            @if ($post->category->id === $category->id)
+                                selected
+                            @endif
+                        >{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
                     <textarea name="content" id="content" cols="5" rows="5" class="form-control">{{ $post->content }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Select tags</label>
+                    <div class="checkbox">
+                        @foreach ($tags as $tag)
+                            <label>
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tags"
+                                {{-- To make a checkbox auto-selected if its associated with the post, we
+                                need to loop through all the post's tags and find the one that matches the current
+                                tag id --}}
+                                @foreach ($post->tags as $postTag)
+                                    @if ($postTag->id === $tag->id)
+                                        checked
+                                    @endif
+                                @endforeach
+                                > {{ $tag->tag }}
+                            </label>
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="form-group">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
+use App\Tag;
 
 class PostsController extends Controller
 {
@@ -30,7 +31,7 @@ class PostsController extends Controller
             toastr()->info('Create post categories to create a post');
             return redirect()->back();
         }
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories'))->with('tags', Tag::all());
     }
 
     /**
@@ -45,7 +46,8 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'featured' => 'required|image',
             'content' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'tags' => 'required'
         ]);
 
         // Handle saving the image first. Change the image name
@@ -64,10 +66,16 @@ class PostsController extends Controller
             'slug' => str_slug($request->title)
         ]);
 
+        // Handling the Many-To-Many Relationship
+        // The attach() method becomes available to us when
+        // we've created our Pivot table. It takes an array as
+        // argument
+
+        $post->tags()->attach($request->tags);
+
         if ($post instanceof Post) {
             toastr()->success('Post created successfully');
-            // return redirect()->route('posts.index');
-            return back();
+            return redirect()->route('posts.index');
         }
         toastr()->error('An error occurred while creating post. Try again');
         return back();
@@ -93,7 +101,8 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
         return view('admin.posts.edit', compact('post'))
-                    ->with('categories', Category::all());
+                    ->with('categories', Category::orderBy('name', 'asc')->get())
+                    ->with('tags', Tag::all());
     }
 
     /**
@@ -109,7 +118,8 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
             'category_id' => 'required',
-            'featured' => $this->setValidationForFile($request)
+            'featured' => $this->setValidationForFile($request),
+            'tags' => 'required'
         ]);
 
         $updates = [
@@ -125,7 +135,8 @@ class PostsController extends Controller
 
             $updates['featured'] = 'uploads/posts/'.$featuredNewName;
         }
-        $postWasUpdated = $post->update($updates);
+        $postWasUpdated = $post->update($updates) &&
+                            $post->tags()->sync($request->tags);
 
         if ($postWasUpdated) {
             toastr()->success("Post updated successfully");

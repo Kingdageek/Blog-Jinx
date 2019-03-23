@@ -30,9 +30,21 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="content">Content</label>
                     <textarea name="content" id="content" cols="5" rows="5" class="form-control">{{ old('content') }}   </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Select tags</label>
+                    <div class="checkbox">
+                        @foreach ($tags as $tag)
+                            <label>
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tags"> {{ $tag->tag }}
+                            </label>
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -40,6 +52,7 @@
                         <button class="btn btn-success" type="submit">Store post</button>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>

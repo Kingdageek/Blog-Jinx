@@ -85,7 +85,10 @@
                                 <a href="{{ route('categories.index') }}">Categories</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('posts.index') }}">All posts</a>
+                                <a href="{{ route('tags.index') }}">Tags</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('posts.index') }}">Published posts</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{ route('posts.trash') }}">Trashed posts</a>
