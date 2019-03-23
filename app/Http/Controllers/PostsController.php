@@ -113,8 +113,24 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        /*
+        *   Was getting http doesn't allow unlinking cos an accessor mutates
+        *   the returned value of the Post `featured` attribute to yield the full path
+        *   To delete we have to use the server's absolute path to the file.
+        *   not the http:// path.
+        *   Geez! I just learnt this. We're using SoftDeletes. I wasn't supposed to unlink
+        *   The files. Choi!!
+        */
+        // $featured = substr($post->featured, strpos($post->featured, '/uploads/posts'));
+        // $featured = __DIR__.'/../../../public'.$featured;
+
+        if ( $post->delete() ) {
+            toastr()->success("Post successfully deleted");
+        } else {
+            toastr()->error("Post couldn't be trashed. An error occurred. Try again");
+        }
+        return redirect()->back();
     }
 }
