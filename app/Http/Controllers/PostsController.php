@@ -87,12 +87,13 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'))
+                    ->with('categories', Category::all());
     }
 
     /**
@@ -102,15 +103,50 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'category_id' => 'required',
+            'featured' => $this->setValidationForFile($request)
+        ]);
+
+        $updates = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category_id
+        ];
+
+        if ($request->hasFile('featured')) {
+            $featured = $request->featured;
+            $featuredNewName = time().$featured->getClientOriginalName();
+            $featured->move('uploads/posts', $featuredNewName);
+
+            $updates['featured'] = 'uploads/posts/'.$featuredNewName;
+        }
+        $postWasUpdated = $post->update($updates);
+
+        if ($postWasUpdated) {
+            toastr()->success("Post updated successfully");
+            return redirect()->route('posts.index');
+        }
+        toastr()->error("Post could not be updated. An error occurred. Try Again");
+        return redirect()->back();
+    }
+
+    private function setValidationForFile(Request $request)
+    {
+        if ($request->hasFile('featured')) {
+            return 'image';
+        }
+        return '';
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
@@ -127,10 +163,46 @@ class PostsController extends Controller
         // $featured = __DIR__.'/../../../public'.$featured;
 
         if ( $post->delete() ) {
-            toastr()->success("Post successfully deleted");
+            toastr()->success("Post successfully sent to trash");
         } else {
             toastr()->error("Post couldn't be trashed. An error occurred. Try again");
         }
         return redirect()->back();
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()
+            ->where('id', $id)
+            ->first();
+            if ($post->restore()) {
+                toastr()->success("Post successfully restored");
+                return redirect()->route('posts.index');
+            }
+            toastr()->error("Post could not be restored. An error occurred. Try Again");
+            return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $post = Post::withTrashed()
+            ->where('id', $id)
+            ->first();
+
+        $featured = substr($post->featured, strpos($post->featured, '/uploads/posts'));
+        $featured = __DIR__.'/../../../public'.$featured;
+
+        if (unlink($featured) && $post->forceDelete()) {
+            toastr()->success("Post permanently deleted successfully");
+        } else {
+            toastr()->error("An error occurred. Post couldn't be deleted. Try Again");
+        }
+        return redirect()->back();
+    }
+
+    public function trash()
+    {
+        $posts = Post::onlyTrashed()->get();
+        return view('admin.posts.trash', compact('posts'));
     }
 }
