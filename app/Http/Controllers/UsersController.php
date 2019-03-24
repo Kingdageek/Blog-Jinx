@@ -48,7 +48,8 @@ class UsersController extends Controller
         ]);
 
         Profile::create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'avatar' => 'uploads/avatars/Profile.jpg'
         ]);
 
         toastr()->success('User created successfully');
@@ -98,5 +99,13 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function admin (User $user)
+    {
+        $user->is_admin = $user->is_admin ? 0 : 1;
+        $user->save();
+        toastr()->success('User permissions changed successfully');
+        return redirect()->back();
     }
 }
