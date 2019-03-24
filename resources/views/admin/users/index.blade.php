@@ -35,7 +35,17 @@
                                     {{ $user->name }}
                                 </td>
                                 <td>
-                                    Permissions
+                                    @if ($user->is_admin)
+                                        <form action="{{ route('users.admin', ['user' => $user->id]) }}" method="post">
+                                            @csrf
+                                            <input type="submit" value="Remove permissions" class="btn btn-xs btn-danger">
+                                        </form>
+                                    @else
+                                        <form action="{{ route('users.admin', ['user' => $user->id]) }}" method="post">
+                                            @csrf
+                                            <input type="submit" value="Make admin" class="btn btn-xs btn-primary">
+                                        </form>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-info">
