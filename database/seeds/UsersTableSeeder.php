@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Nonso Godtime',
             'email' => 'mgbechinonso@bjinx.com',
             'password' => bcrypt('whatever'),
-            'admin' => 1
+            'is_admin' => 1
         ]);
 
         App\Profile::create([
