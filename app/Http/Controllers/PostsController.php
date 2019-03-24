@@ -114,6 +114,13 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        // Tried to write a custom method to make sure the file, if
+        // uploaded, is an image. Turns out laravel 5.7 uses middlewares
+        // TrimStrings and ConvertEmptyStringsToNull to do exactly what they say.
+        // From the Laravel doc, `nullable|{anotherValidation}` can be used
+        // to tell the framework that a particular field can be optional or meet
+        // that validation parameter.
+
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
