@@ -30,5 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('/categories', 'CategoriesController');
 
+    Route::post('/users/admin/{user}', 'UsersController@admin')->name('users.admin');
+
     Route::resource('/users', 'UsersController');
 });
