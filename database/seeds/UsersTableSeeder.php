@@ -12,10 +12,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // Add site blog admin
-        App\User::create([
+        $user = App\User::create([
             'name' => 'Nonso Godtime',
             'email' => 'mgbechinonso@bjinx.com',
-            'password' => bcrypt('whatever')
+            'password' => bcrypt('whatever'),
+            'admin' => 1
+        ]);
+
+        App\Profile::create([
+            'user_id' => $user->id,
+            'avatar' => 'uploads/avatars/Profile.jpg',
+            'about' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate odit, tenetur, fugit non nam sed illum placeat aut sint impedit, ipsum consequuntur! Vel repellendus temporibus cumque voluptatum, mollitia et voluptatem?',
+            'facebook' => 'https://www.facebook.com/kingdageek',
+            'youtube' => 'https://www.youtube.com'
         ]);
     }
 }
