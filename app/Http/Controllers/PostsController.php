@@ -118,7 +118,8 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
             'category_id' => 'required',
-            'featured' => $this->setValidationForFile($request),
+            // 'featured' => $this->setValidationForFile($request),
+            'featured' => 'nullable|image',
             'tags' => 'required'
         ]);
 
