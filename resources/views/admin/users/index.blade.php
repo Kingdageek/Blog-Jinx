@@ -48,12 +48,14 @@
                                     <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-info">
                                         Edit
                                     </a>
-
-                                    <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="user" onclick="confirm('Sure to send this user to trash?') ? '' : event.preventDefault()" style="display:inline-block">
+                                {{--  To ensure a user doesn't even attempt to delete him/herself  --}}
+                                @if (auth()->id() !== $user->id)
+                                    <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" onclick="confirm('Sure to delete this user permanently?') ? '' : event.preventDefault()" style="display:inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="submit" value="Trash" class="btn btn-danger btn-xs">
+                                        <input type="submit" value="Delete" class="btn btn-danger btn-xs">
                                     </form>
+                                @endif
                                 </td>
                             </tr>
                         @endforeach
