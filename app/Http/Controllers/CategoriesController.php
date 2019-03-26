@@ -98,6 +98,17 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
+        // To force delete all posts associated with said category
+        // before deleting the category itself.
+        foreach ($category->posts as $post) {
+            // unlink the featured image.
+            // Remember the accessor we set for featured to convert featured to
+            // http long path with asset()
+            $featured = substr($post->featured, strpos($post->featured, '/uploads/posts'));
+            $featured = __DIR__.'/../../../public'.$featured;
+            unlink($featured);
+            $post->forceDelete();
+        }
         $category->delete();
         toastr()->success('Category deleted successfully');
         return redirect()->route('categories.index');
