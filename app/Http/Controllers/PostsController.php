@@ -27,11 +27,12 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        if ($categories->isEmpty()) {
-            toastr()->info('Create post categories to create a post');
+        $tags = Tag::all();
+        if ($categories->isEmpty() || $tags->isEmpty()) {
+            toastr()->info('Create post categories and tags to create a post');
             return redirect()->back();
         }
-        return view('admin.posts.create', compact('categories'))->with('tags', Tag::all());
+        return view('admin.posts.create', compact('categories'))->with('tags', $tags);
     }
 
     /**
