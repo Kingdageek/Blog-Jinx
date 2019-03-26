@@ -81,8 +81,13 @@
                             <li class="list-group-item">
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
+                            @if ( auth()->user()->is_admin)
+                                <li class="list-group-item">
+                                    <a href="{{ route('users.index') }}">Users</a>
+                                </li>
+                            @endif
                             <li class="list-group-item">
-                                <a href="{{ route('users.index') }}">Users</a>
+                                <a href="{{ route('users.profile.index') }}">My Profile</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{ route('categories.index') }}">Categories</a>

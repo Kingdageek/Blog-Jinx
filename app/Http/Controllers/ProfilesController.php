@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Profile;
 use Illuminate\Http\Request;
+use App\User;
 
 class ProfilesController extends Controller
 {
@@ -14,7 +15,7 @@ class ProfilesController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.users.profile')->with('user', auth()->user());
     }
 
     /**
@@ -64,12 +65,52 @@ class ProfilesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => 'nullable|min:6',
+            'avatar' => 'nullable|image',
+            'youtube' => 'nullable|url',
+            'facebook' => 'nullable|url',
+            'about' => 'required'
+        ]);
+
+        // Deal with 'users' table
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        // Update
+        $user->save();
+
+        // handle the avatar file
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->avatar;
+            $avatarNewName = time().$avatar->getClientOriginalName();
+            $avatar->move('uploads/avatars', $avatarNewName);
+
+            $user->profile->avatar = 'uploads/avatars/'.$avatarNewName;
+        }
+
+        $user->profile->about = $request->about;
+        $user->profile->facebook = $request->facebook;
+        $user->profile->youtube = $request->youtube;
+
+        // Update user profile
+        $user->profile->save();
+
+        $message = $user->id === auth()->id() ?
+        'Your profile details have been updated successfully' :
+        'User profile updated successfully';
+        toastr()->success($message);
+        return redirect()->back();
     }
 
     /**

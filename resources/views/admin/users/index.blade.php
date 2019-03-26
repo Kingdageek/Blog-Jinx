@@ -35,17 +35,14 @@
                                     {{ $user->name }}
                                 </td>
                                 <td>
+                                    <form action="{{ route('users.admin', ['user' => $user->id]) }}" method="post" onclick="confirm('Sure to change this user\'s permissions?') ? '' : event.preventDefault()">
+                                    @csrf
                                     @if ($user->is_admin)
-                                        <form action="{{ route('users.admin', ['user' => $user->id]) }}" method="post">
-                                            @csrf
-                                            <input type="submit" value="Remove permissions" class="btn btn-xs btn-danger">
-                                        </form>
+                                        <input type="submit" value="Remove permissions" class="btn btn-xs btn-danger">
                                     @else
-                                        <form action="{{ route('users.admin', ['user' => $user->id]) }}" method="post">
-                                            @csrf
-                                            <input type="submit" value="Make admin" class="btn btn-xs btn-primary">
-                                        </form>
+                                        <input type="submit" value="Make admin" class="btn btn-xs btn-primary">
                                     @endif
+                                    </form>
                                 </td>
                                 <td>
                                     <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-info">
