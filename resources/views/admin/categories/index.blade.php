@@ -29,7 +29,7 @@
                                     Edit
                                 </a>
 
-                                <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" onclick="confirm('Sure to delete this category?') ? '' : event.preventDefault()" style="display:inline-block">
+                                <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" onclick="confirm('Deleting this category would also permanently delete all the posts associated with it. Do you want to proceed?') ? '' : event.preventDefault()" style="display:inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <input type="submit" value="Delete" class="btn btn-danger btn-xs">
