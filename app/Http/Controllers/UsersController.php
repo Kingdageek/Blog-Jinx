@@ -99,12 +99,14 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->profile->delete();
+        $user->delete();
+        toastr()->success('User deleted successfully');
     }
 
     public function admin (User $user)
