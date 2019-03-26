@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -110,8 +111,9 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    @toastr_render
+    @yield('scripts')
 </body>
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/toastr.min.js') }}"></script>
-@toastr_render
 </html>

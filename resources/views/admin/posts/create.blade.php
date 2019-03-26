@@ -57,3 +57,14 @@
         </div>
     </div>
 @stop
+@section('styles')
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+@endsection
+@section('scripts')
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js" defer></script>
+    <script>
+        $(document).ready(function() {
+            $('#content').summernote();
+        });
+    </script>
+@endsection
