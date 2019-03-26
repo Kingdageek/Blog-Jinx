@@ -34,5 +34,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/users/profile', 'ProfilesController@index')->name('users.profile.index');
     Route::patch('/users/profile/{user}', 'ProfilesController@update')->name('users.profile.update');
 
+    Route::patch('/settings', 'SettingsController@update')->name('settings.update');
+    Route::get('/settings', 'SettingsController@index')->name('settings.index');
+
     Route::resource('/users', 'UsersController');
 });
