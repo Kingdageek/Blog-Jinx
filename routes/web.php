@@ -31,6 +31,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('/categories', 'CategoriesController');
 
     Route::post('/users/admin/{user}', 'UsersController@admin')->name('users.admin');
+    Route::get('/users/profile', 'ProfilesController@index')->name('users.profile.index');
+    Route::patch('/users/profile/{user}', 'ProfilesController@update')->name('users.profile.update');
 
     Route::resource('/users', 'UsersController');
 });
