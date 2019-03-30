@@ -9,3 +9,5 @@ So, *clone the repo*, run `composer install` to get the neccessary packages, cop
 In *database/seeds/UsersTableSeeder.php* there's specified admin details you could seed your database with to login first time.
 To do that, uncomment the `$this->call(UsersTableSeeder::class)` code in the *DatabaseSeeder* class and then run `php artisan db:seed`.
 Then, login with the details in the *UsersTableSeeder* class.
+
+Also, for photo uploads, in the **public** folder, create *uploads/posts* directory for blog post photos and *uploads/avatars* directory for blog admin profile photos.
