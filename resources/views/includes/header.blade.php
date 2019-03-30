@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Seosight - Index Page</title>
+    <title>{{ $settings->site_name }}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/fonts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/crumina-fonts.css') }}">
@@ -47,7 +47,7 @@
                 <div class="header-content-wrapper">
                     <div class="logo">
                         <div class="logo-text">
-                            <div class="logo-title">Blog Jinx</div>
+                            <div class="logo-title">{{ $settings->site_name }}</div>
                         </div>
                     </div>
 
@@ -62,21 +62,11 @@
                             </span>
                         </a>
                         <ul class="primary-menu-menu" style="overflow: hidden;">
-                            <li class="">
-                                <a href="">NEWS</a>
-                            </li>
-                            <li class="">
-                                <a href="">VIDEOS</a>
-                            </li>
-                            <li class="">
-                                <a href="">DISCUSSIONS</a>
-                            </li>
-                            <li class="">
-                                <a href="">TUTORIALS</a>
-                            </li>
-                            <li class="">
-                                <a href="">NEWSLETTER</a>
-                            </li>
+                            @foreach ($categories as $category)
+                                <li class="">
+                                    <a href="">{{ $category->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </nav>
                     <ul class="nav-add">
