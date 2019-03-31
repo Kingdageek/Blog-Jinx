@@ -19,6 +19,9 @@
                             Post title
                         </th>
                         <th>
+                            Category
+                        </th>
+                        <th>
                             Actions
                         </th>
                     </thead>
@@ -30,6 +33,9 @@
                                 </td>
                                 <td>
                                     {{ $post->title }}
+                                </td>
+                                <td>
+                                    {{ $post->category->name }}
                                 </td>
                                 <td>
                                     <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-xs btn-info">
