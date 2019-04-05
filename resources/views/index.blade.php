@@ -1,4 +1,5 @@
-    @include('includes.header')
+@extends('layouts.frontend')
+@section('content')
     <div class="header-spacer"></div>
 
     <div class="container">
@@ -14,7 +15,7 @@
                             <a href="{{ $first_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
-                            <a href="#" class="link-post">
+                            <a href="{{ route('frontend.single', ['slug' => $first_post->slug]) }}" class="link-post">
                                 <i class="seoicon-link-bold"></i>
                             </a>
                         </div>
@@ -71,7 +72,7 @@
                             <a href="{{ $second_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
-                            <a href="#" class="link-post">
+                            <a href="{{ route('frontend.single', ['slug' => $second_post->slug]) }}" class="link-post">
                                 <i class="seoicon-link-bold"></i>
                             </a>
                         </div>
@@ -123,7 +124,7 @@
                             <a href="{{ $third_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
-                            <a href="#" class="link-post">
+                            <a href="{{ route('frontend.single', ['slug' => $third_post->slug]) }}" class="link-post">
                                 <i class="seoicon-link-bold"></i>
                             </a>
                         </div>
@@ -196,7 +197,7 @@
                                             <div class="case-item__thumb">
                                                 <img src="{{ $post->featured }}" alt="our case">
                                             </div>
-                                            <h6 class="case-item__title"><a href="#">{{ $post->title }}</a></h6>
+                                            <h6 class="case-item__title"><a href="{{ route('frontend.single', ['slug' => $post->slug]) }}">{{ $post->title }}</a></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -213,43 +214,4 @@
             </div>
         </div>
     </div>
-
-<!-- Subscribe Form -->
-
-<div class="container-fluid bg-green-color">
-    <div class="row">
-        <div class="container">
-            <div class="row">
-                <div class="subscribe scrollme">
-                    <div class="col-lg-6 col-lg-offset-5 col-md-6 col-md-offset-5 col-sm-12 col-xs-12">
-                        <h4 class="subscribe-title">Email Newsletters!</h4>
-                        <form class="subscribe-form" method="post" action="">
-                            <input class="email input-standard-grey input-white" name="email" required="required" placeholder="Your Email Address" type="email">
-                            <button class="subscr-btn">subscribe
-                                <span class="semicircle--right"></span>
-                            </button>
-                        </form>
-                        <div class="sub-title">Sign up for new {{ $settings->site_name ?? 'Seosight' }} content, updates, surveys & offers.</div>
-
-                    </div>
-
-                    <div class="images-block">
-                        <img src="{{ asset('app/img/subscr-gear.png') }}" alt="gear" class="gear">
-                        <img src="{{ asset('app/img/subscr1.png') }}" alt="mail" class="mail">
-                        <img src="{{ asset('app/img/subscr-mailopen.png') }}" alt="mail" class="mail-2">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- End Subscribe Form -->
-</div>
-
-
-
-@include('includes.footer')
-
-</body>
-</html>
+@endsection
