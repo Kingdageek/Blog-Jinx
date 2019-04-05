@@ -6,10 +6,33 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
 use App\Settings;
+use App\Tag;
 
 class FrontendController extends Controller
 {
     public function index()
+    {
+        $categories = $this->sortCategories();
+        return view('index')
+                    ->with('categories', $categories)
+                    ->with('first_post', Post::orderBy('created_at', 'DESC')->first())
+                    ->with('second_post', Post::orderBy('created_at', 'DESC')->skip(1)->take(1)->get()->first())
+                    ->with('third_post', Post::orderBy('created_at', 'DESC')->skip(2)->take(1)->get()->first())
+                    ->with('settings', Settings::first());
+    }
+
+    public function singlePost ($slug)
+    {
+        $categories = $this->sortCategories();
+        $post = Post::where('slug', $slug)->first();
+        return view('single')
+                    ->with('post', $post)
+                    ->with('categories', $categories)
+                    ->with('tags', Tag::all())
+                    ->with('settings', Settings::first());
+    }
+
+    private function sortCategories ()
     {
         $categories = Category::all();
 
@@ -25,17 +48,11 @@ class FrontendController extends Controller
                 }
                 return ($aCount > $bCount) ? 1 : -1;
             });
-
-            // Take the top four categories
-
-            $categories = $categories->take(4);
         }
 
-        return view('welcome')
-                    ->with('categories', $categories)
-                    ->with('first_post', Post::orderBy('created_at', 'DESC')->first())
-                    ->with('second_post', Post::orderBy('created_at', 'DESC')->skip(1)->take(1)->get()->first())
-                    ->with('third_post', Post::orderBy('created_at', 'DESC')->skip(2)->take(1)->get()->first())
-                    ->with('settings', Settings::first());
+        // Take the top four categories
+
+        $categories = $categories->take(4);
+        return $categories;
     }
 }
