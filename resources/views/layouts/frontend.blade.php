@@ -1,3 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+        @yield('title', $settings->site_name )
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/fonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/crumina-fonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/grid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/styles.css') }}">
+
+
+    <!--Plugins styles-->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/jquery.mCustomScrollbar.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/swiper.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/primary-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app/css/magnific-popup.css') }}">
+
+    <!--Styles for RTL-->
+
+    <!--<link rel="stylesheet" type="text/css" href="{{ asset('app/css/rtl.css') }}">-->
+
+    <!--External fonts-->
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <style>
+        .padded-50{
+            padding: 40px;
+        }
+        .text-center{
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+
+<body class=" ">
+
+<div class="content-wrapper">
+
+    <header class="header" id="site-header">
+        <div class="container">
+                <div class="header-content-wrapper">
+                    <div class="logo">
+                        <div class="logo-text">
+                            <div class="logo-title">{{ $settings->site_name }}</div>
+                        </div>
+                    </div>
+
+                    <nav id="primary-menu" class="primary-menu">
+                        <a href='javascript:void(0)' id="menu-icon-trigger" class="menu-icon-trigger showhide">
+                            <span id="menu-icon-wrapper" class="menu-icon-wrapper" style="visibility: hidden">
+                                <svg width="1000px" height="1000px">
+                                    <path id="pathD" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+                                    <path id="pathE" d="M 300 500 L 700 500"></path>
+                                    <path id="pathF" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+                                </svg>
+                            </span>
+                        </a>
+                        <ul class="primary-menu-menu" style="overflow: hidden;">
+                            @forelse ($categories as $category)
+                                <li class="">
+                                    <a href="">{{ $category->name }}</a>
+                                </li>
+                            @empty
+                                <li class="">
+                                    <a href="">NEWS</a>
+                                </li>
+                                <li class="">
+                                    <a href="">VIDEOS</a>
+                                </li>
+                                <li class="">
+                                    <a href="">DISCUSSIONS</a>
+                                </li>
+                                <li class="">
+                                    <a href="">TUTORIALS</a>
+                                </li>
+                                <li class="">
+                                    <a href="">NEWSLETTER</a>
+                                </li>
+                            @endforelse
+                        </ul>
+                    </nav>
+                    <ul class="nav-add">
+                        <li class="search search_main" style="color: black; margin-top: 5px;">
+                            <a href="#" class="js-open-search">
+                                <i class="seoicon-loupe"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </header>
+
+
+
+@yield('content')
+
+<!-- Subscribe Form -->
+
+<div class="container-fluid bg-green-color">
+<div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="subscribe scrollme">
+                <div class="col-lg-6 col-lg-offset-5 col-md-6 col-md-offset-5 col-sm-12 col-xs-12">
+                    <h4 class="subscribe-title">Email Newsletters!</h4>
+                    <form class="subscribe-form" method="post" action="">
+                        <input class="email input-standard-grey input-white" name="email" required="required" placeholder="Your Email Address" type="email">
+                        <button class="subscr-btn">subscribe
+                            <span class="semicircle--right"></span>
+                        </button>
+                    </form>
+                    <div class="sub-title">Sign up for new {{ $settings->site_name ?? 'Seosight' }} content, updates, surveys & offers.</div>
+
+                </div>
+
+                <div class="images-block">
+                    <img src="{{ asset('app/img/subscr-gear.png') }}" alt="gear" class="gear">
+                    <img src="{{ asset('app/img/subscr1.png') }}" alt="mail" class="mail">
+                    <img src="{{ asset('app/img/subscr-mailopen.png') }}" alt="mail" class="mail-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- End Subscribe Form -->
+</div>
+
 <!-- Footer -->
 
 <footer class="footer" id="site-footer">
@@ -139,3 +276,7 @@
 
 
 <!-- ...end JS Script -->
+
+
+</body>
+</html>
