@@ -21,7 +21,7 @@ class FrontendController extends Controller
                     ->with('settings', Settings::first());
     }
 
-    public function singlePost ($slug)
+    public function singlePost ($category, $slug)
     {
         $categories = $this->sortCategories();
         $post = Post::where('slug', $slug)->first();
@@ -40,13 +40,13 @@ class FrontendController extends Controller
         // number of posts they have, if we have some Categories
 
         if ( ! $categories->isEmpty() ) {
-            $categories->sort(function ($a, $b) {
+            $categories = $categories->sort(function ($a, $b) {
                 $aCount = $a->posts()->count();
                 $bCount = $b->posts()->count();
                 if ($aCount === $bCount) {
                     return 0;
                 }
-                return ($aCount > $bCount) ? 1 : -1;
+                return ($aCount < $bCount) ? 1 : -1;
             });
         }
 
