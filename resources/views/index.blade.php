@@ -15,7 +15,7 @@
                             <a href="{{ $first_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
-                            <a href="{{ route('frontend.single', ['slug' => $first_post->slug]) }}" class="link-post">
+                            <a href="{{ route('frontend.single', ['category' => $first_post->category->slug, 'slug' => $first_post->slug]) }}" class="link-post">
                                 <i class="seoicon-link-bold"></i>
                             </a>
                         </div>
@@ -72,7 +72,7 @@
                             <a href="{{ $second_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
-                            <a href="{{ route('frontend.single', ['slug' => $second_post->slug]) }}" class="link-post">
+                            <a href="{{ route('frontend.single', ['category' => $second_post->category->slug, 'slug' => $second_post->slug]) }}" class="link-post">
                                 <i class="seoicon-link-bold"></i>
                             </a>
                         </div>
@@ -124,7 +124,7 @@
                             <a href="{{ $third_post->featured }}" class="link-image js-zoom-image">
                                 <i class="seoicon-zoom"></i>
                             </a>
-                            <a href="{{ route('frontend.single', ['slug' => $third_post->slug]) }}" class="link-post">
+                            <a href="{{ route('frontend.single', ['category' => $third_post->category->slug, 'slug' => $third_post->slug]) }}" class="link-post">
                                 <i class="seoicon-link-bold"></i>
                             </a>
                         </div>
@@ -197,7 +197,7 @@
                                             <div class="case-item__thumb">
                                                 <img src="{{ $post->featured }}" alt="our case">
                                             </div>
-                                            <h6 class="case-item__title"><a href="{{ route('frontend.single', ['slug' => $post->slug]) }}">{{ $post->title }}</a></h6>
+                                            <h6 class="case-item__title"><a href="{{ route('frontend.single', ['category' => $post->category->slug, 'slug' => $post->slug]) }}">{{ $post->title }}</a></h6>
                                         </div>
                                     </div>
                                 </div>
