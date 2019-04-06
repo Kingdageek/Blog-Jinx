@@ -164,6 +164,7 @@
                                     <span class="short-line"></span>
                                     <span class="long-line"></span>
                                 </div>
+                                @include('includes.disqus')
                             </div>
                         </div>
 
