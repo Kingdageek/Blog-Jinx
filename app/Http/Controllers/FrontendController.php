@@ -25,8 +25,12 @@ class FrontendController extends Controller
     {
         $categories = $this->sortCategories();
         $post = Post::where('slug', $slug)->first();
+        $prev_post_id = Post::where('id', '<', $post->id)->max('id');
+        $next_post_id = Post::where('id', '>', $post->id)->min('id');
         return view('single')
                     ->with('post', $post)
+                    ->with('prev_post', Post::find($prev_post_id))
+                    ->with('next_post', Post::find($next_post_id))
                     ->with('categories', $categories)
                     ->with('tags', Tag::all())
                     ->with('settings', Settings::first());
