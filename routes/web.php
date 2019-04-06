@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', 'FrontendController@index')->name('frontend.index');
-Route::get('/{slug}', 'FrontendController@singlePost')->name('frontend.single');
-
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -38,3 +35,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('/users', 'UsersController');
 });
+
+Route::get('/', 'FrontendController@index')->name('frontend.index');
+Route::get('/{category}/{slug}', 'FrontendController@singlePost')->name('frontend.single');
