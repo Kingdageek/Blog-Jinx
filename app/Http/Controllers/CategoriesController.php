@@ -42,6 +42,7 @@ class CategoriesController extends Controller
 
         $category = new Category;
         $category->name = $request->name;
+        $category->slug = str_slug($request->name);
         $category->save();
 
         // Set toastr notification
@@ -84,7 +85,8 @@ class CategoriesController extends Controller
             'name' => 'required'
         ]);
         $category->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'slug' => str_slug($request->name)
         ]);
         toastr()->success('Category updated successfully');
         return redirect()->route('categories.index');
