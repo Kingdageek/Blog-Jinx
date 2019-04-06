@@ -135,6 +135,7 @@ class PostsController extends Controller
         $updates = [
             'title' => $request->title,
             'content' => $request->content,
+            'slug' => str_slug($request->title),
             'category_id' => $request->category_id
         ];
 
