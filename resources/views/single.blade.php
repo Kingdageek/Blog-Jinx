@@ -97,7 +97,7 @@
                         <div class="blog-details-author">
 
                             <div class="blog-details-author-thumb">
-                                <img src="{{ $post->user->profile->avatar }}" alt="Author" style="height: 10em;
+                                <img src="{{ asset($post->user->profile->avatar) }}" alt="Author" style="height: 10em;
                                 border-radius: 50%;">
                             </div>
 
@@ -111,19 +111,19 @@
                                 <div class="socials">
 
                                     <a href="{{ $post->user->profile->facebook }}" class="social__item">
-                                        <img src="app/svg/circle-facebook.svg" alt="facebook">
+                                        <img src="{{ asset('app/svg/circle-facebook.svg') }}" alt="facebook">
                                     </a>
 
                                     <a href="{{ $post->user->profile->twitter }}" class="social__item">
-                                        <img src="app/svg/twitter.svg" alt="twitter">
+                                        <img src="{{ asset('app/svg/twitter.svg') }}" alt="twitter">
                                     </a>
 
                                     <a href="#" class="social__item">
-                                        <img src="app/svg/google.svg" alt="google">
+                                        <img src="{{ asset('app/svg/google.svg') }}" alt="google">
                                     </a>
 
                                     <a href="{{ $post->user->profile->youtube }}" class="social__item">
-                                        <img src="app/svg/youtube.svg" alt="youtube">
+                                        <img src="{{ asset('app/svg/youtube.svg') }}" alt="youtube">
                                     </a>
 
                                 </div>
