@@ -36,6 +36,14 @@ class FrontendController extends Controller
                     ->with('settings', Settings::first());
     }
 
+    public function category (Category $category)
+    {
+        return view('category', compact('category'))
+                    ->with('categories', $this->sortCategories())
+                    ->with('tags', Tag::all())
+                    ->with('settings', Settings::first());
+    }
+
     private function sortCategories ()
     {
         $categories = Category::all();
