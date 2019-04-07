@@ -66,7 +66,7 @@
                         <ul class="primary-menu-menu" style="overflow: hidden;">
                             @forelse ($categories as $category)
                                 <li class="">
-                                    <a href="">{{ $category->name }}</a>
+                                    <a href="{{ route('frontend.category', ['category'=>$category->slug]) }}">{{ $category->name }}</a>
                                 </li>
                             @empty
                                 <li class="">
