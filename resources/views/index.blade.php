@@ -42,7 +42,7 @@
 
                                         <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">{{ $first_post->category->name }}</a>
+                                            <a href="{{ route('frontend.category', ['category'=>$first_post->category->slug]) }}">{{ $first_post->category->name }}</a>
                                         </span>
 
                                         <span class="post__comments">
@@ -99,7 +99,7 @@
 
                                         <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">{{ $second_post->category->name }}</a>
+                                            <a href="{{ route('frontend.category', ['category'=>$second_post->category->slug]) }}">{{ $second_post->category->name }}</a>
                                         </span>
 
                                         <span class="post__comments">
@@ -151,7 +151,7 @@
 
                                         <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">{{ $third_post->category->name }}</a>
+                                            <a href="{{ route('frontend.category', ['category'=>$third_post->category->slug]) }}">{{ $third_post->category->name }}</a>
                                         </span>
 
                                         <span class="post__comments">
