@@ -36,7 +36,7 @@ class TagsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tag' => 'required|max:50'
+            'tag' => ['required', 'max:50', 'string', 'unique:tags']
         ]);
 
         $tagWasCreated = Tag::create([
@@ -83,7 +83,7 @@ class TagsController extends Controller
     public function update(Request $request, Tag $tag)
     {
         $this->validate($request, [
-            'tag' => 'required|max:50'
+            'tag' => ['required', 'max:50', 'string', 'unique:tags']
         ]);
         $tagWasUpdated = $tag->update([
             'tag' => $request->tag
