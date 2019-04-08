@@ -45,6 +45,17 @@ class FrontendController extends Controller
                     ->with('settings', Settings::first());
     }
 
+    public function search (Request $request)
+    {
+        $posts = Post::where('title', 'LIKE', '%'.$request->q.'%')
+                            ->orderBy('created_at', 'DESC')->get();
+        return view('search', compact('posts'))
+                    ->with('query', $request->q)
+                    ->with('categories', $this->sortCategories())
+                    ->with('tags', Tag::all())
+                    ->with('settings', Settings::first());
+    }
+
     public function tag ($tag)
     {
         $tag = Tag::where('slug', $tag)->first();
