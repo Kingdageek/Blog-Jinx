@@ -37,5 +37,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 
 Route::get('/', 'FrontendController@index')->name('frontend.index');
+Route::get('/categories/{category}', 'FrontendController@category')->name('frontend.category');
+Route::get('/tags/{tag}', 'FrontendController@tag')->name('frontend.tag');
 Route::get('/{category}/{slug}', 'FrontendController@singlePost')->name('frontend.single');
-Route::get('/{category}', 'FrontendController@category')->name('frontend.category');
