@@ -49,7 +49,11 @@
                 <div class="header-content-wrapper">
                     <div class="logo">
                         <div class="logo-text">
-                            <div class="logo-title">{{ $settings->site_name }}</div>
+                            <div class="logo-title">
+                                <a href="{{ route('frontend.index') }}">
+                                    {{ $settings->site_name }}
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -247,8 +251,8 @@
     <div class="container">
         <div class="row">
             <div class="form_search-wrap">
-                <form>
-                    <input class="overlay_search-input" placeholder="Type and hit Enter..." type="text">
+                <form action="{{ route('frontend.search') }}">
+                    <input class="overlay_search-input" name="q" placeholder="Type and hit Enter..." type="text">
                     <a href="#" class="overlay_search-close">
                         <span></span>
                         <span></span>
