@@ -66,7 +66,7 @@
                                     <div class="widget w-tags">
                                         <div class="tags-wrap">
                                             @foreach ($post->tags as $tag)
-                                                <a href="#" class="w-tags-item">{{ $tag->tag }}</a>
+                                                <a href="{{ route('frontend.tag', ['tag'=>$tag->slug]) }}" class="w-tags-item">{{ $tag->tag }}</a>
                                             @endforeach
                                         </div>
                                     </div>
