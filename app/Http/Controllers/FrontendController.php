@@ -36,9 +36,19 @@ class FrontendController extends Controller
                     ->with('settings', Settings::first());
     }
 
-    public function category (Category $category)
+    public function category ($category)
     {
+        $category = Category::where('slug', $category)->first();
         return view('category', compact('category'))
+                    ->with('categories', $this->sortCategories())
+                    ->with('tags', Tag::all())
+                    ->with('settings', Settings::first());
+    }
+
+    public function tag ($tag)
+    {
+        $tag = Tag::where('slug', $tag)->first();
+        return view('tag', compact('tag'))
                     ->with('categories', $this->sortCategories())
                     ->with('tags', Tag::all())
                     ->with('settings', Settings::first());
