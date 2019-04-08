@@ -109,11 +109,11 @@
                                 </p>
                                 <div class="socials">
 
-                                    <a href="{{ $post->user->profile->facebook }}" class="social__item">
+                                    <a href="{{ $post->user->profile->facebook }}" target="blank" class="social__item">
                                         <img src="{{ asset('app/svg/circle-facebook.svg') }}" alt="facebook">
                                     </a>
 
-                                    <a href="{{ $post->user->profile->youtube }}" class="social__item">
+                                    <a href="{{ $post->user->profile->youtube }}" target="blank" class="social__item">
                                         <img src="{{ asset('app/svg/youtube.svg') }}" alt="youtube">
                                     </a>
 
