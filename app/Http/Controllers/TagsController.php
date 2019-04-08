@@ -40,7 +40,8 @@ class TagsController extends Controller
         ]);
 
         $tagWasCreated = Tag::create([
-            'tag' => $request->tag
+            'tag' => $request->tag,
+            'slug' => str_slug($request->tag)
         ]);
 
         if ($tagWasCreated) {
@@ -86,7 +87,8 @@ class TagsController extends Controller
             'tag' => ['required', 'max:50', 'string', 'unique:tags']
         ]);
         $tagWasUpdated = $tag->update([
-            'tag' => $request->tag
+            'tag' => $request->tag,
+            'slug' => str_slug($request->tag)
         ]);
         if ($tagWasUpdated) {
             toastr()->success('Tag successfully updated');
