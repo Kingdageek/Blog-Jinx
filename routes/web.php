@@ -11,10 +11,10 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'HomeController@index')->name('home');
 
     Route::get('/posts/trash', 'PostsController@trash')->name('posts.trash');
     Route::post('/posts/restore/{post}', 'PostsController@restore')->name('posts.restore');
