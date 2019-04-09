@@ -211,6 +211,12 @@ class PostsController extends Controller
             ->where('id', $id)
             ->first();
 
+        // unlink doesn't accept http path. We've setup $post->featured in Post model
+        // to auto return the full http path of featured image.
+        // Find the position of '/uploads/posts' string in 'featured' full http path
+        // Return a substring of 'featured' full http path from that position we
+        // found to the end of 'featured' string.
+
         $featured = substr($post->featured, strpos($post->featured, '/uploads/posts'));
         $featured = __DIR__.'/../../../public'.$featured;
 
