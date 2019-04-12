@@ -16,7 +16,7 @@
         <div class="col-lg-3">
             <div class="panel panel-danger">
                 <div class="panel-heading text-center">
-                    THRASHED POSTS
+                    TRASHED POSTS
                 </div>
                 <div class="panel-body">
                     <h1 class="text-center">{{ $trashed_count }}</h1>
