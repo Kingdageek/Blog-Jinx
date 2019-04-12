@@ -9,12 +9,10 @@ use App\Http\Controllers\FrontendController;
 
 class FrontendComposer
 {
-    private $category;
     private $settings;
 
-    public function __construct(Category $category, Settings $settings)
+    public function __construct(Settings $settings)
     {
-        $this->category = $category;
         $this->settings = $settings;
     }
 
